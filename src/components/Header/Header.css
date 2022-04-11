@@ -1,0 +1,25 @@
+.header-sec {
+    background-color: rgb(88, 229, 222);
+    position: sticky;
+    top: 0;
+    box-shadow: 1px 1px 10px rgb(231, 228, 228);
+}
+
+.header-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+    padding: 5px 10px;
+}
+
+.header-div a {
+    text-decoration: none;
+    margin-right: 10px;
+    padding: 5px 10px;
+    font-size: 18px;
+    color: black;
+    font-weight: 400;
+}
