@@ -33,13 +33,14 @@ const Header = () => {
                     <nav>
                         <Link to='/'>Home</Link>
                         <Link to='/product'>Product</Link>
+                        <Link to='/cart'>Cart</Link>
                         <Link to='/orders'>Orders</Link>
                         {
                             user
                                 ?
                                 <>
                                 <Link onClick={logOut} to='/login'>Log Out</Link>
-                                <Link to='/home'>{user.displayName}</Link>
+                                <Link to='/home'>{user?.displayName ? user?.displayName : 'Unknown'}</Link>
                                 
                                 </>
                                 :

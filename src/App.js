@@ -9,6 +9,7 @@ import Orders from './components/Orders/Orders';
 import Product from './components/Product/Product';
 import Signin from './components/Signin/Signin';
 import { Toaster } from 'react-hot-toast';
+import RequieredAuth from './components/RequireAuth/RequieredAuth';
 
 
 
@@ -23,7 +24,12 @@ function App() {
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
         <Route path='/product' element={<Product></Product>}></Route>
-        <Route path='/orders' element={<Orders></Orders>}></Route>
+        <Route path='/cart' element={<Cart></Cart>}></Route>
+        <Route path='/orders' element={
+          <RequieredAuth>
+            <Orders></Orders>
+          </RequieredAuth>
+        }></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<Signin></Signin>}></Route> 
         <Route path='*' element={ <NotFound></NotFound>}></Route>

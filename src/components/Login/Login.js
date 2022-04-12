@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import toast from 'react-hot-toast';
@@ -9,11 +9,16 @@ import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
 const Login = () => {
     const navigate = useNavigate();
+    
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState('')
     //google login
     const [signInWithGoogle] = useSignInWithGoogle(auth);
+
+
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
 
     //git hub hook
     const [
@@ -32,7 +37,8 @@ const Login = () => {
     const googleLogin = () => {
         signInWithGoogle()
             .then(() => {
-                navigate('/home')
+                navigate(from, {replace: true})
+                return
             })
             .catch((error)=>{
               toast.error('error while login')
@@ -40,7 +46,7 @@ const Login = () => {
         
     }
     if (user) {
-        navigate('/orders')
+        navigate(from, {replace: true})
         toast.success('Successfully login!', { id: 'Success!' })
     }
     // if (error) {
