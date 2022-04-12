@@ -43,21 +43,26 @@ const Login = () => {
         navigate('/orders')
         toast.success('Successfully login!', { id: 'Success!' })
     }
+    // if (error) {
+    //     if(error.message.includes('')){
+           
+    //     }
+    // }
   
     if (loading) {
         toast.success('Loading...', { id: 'Loading!' })
     } 
-    
+
     return (
         <div className='sign-in-sec'>
             <h1>Login</h1>
             <form onSubmit={logIn}>
                 <label htmlFor="email">Email</label>
                 <input onBlur={(e) => setEmail(e.target.value)} type="email" placeholder='Your email' required />
-
+                <p className='erros-style'>{error?.message?.includes('invalid-email') && 'Invalid  email.'}</p>
                 <label htmlFor="password">Password</label>
                 <input onBlur={(e) => setPassword(e.target.value)} type="password" placeholder='Enter password' required />
-                {/* <p>{error.message}</p> */}
+                <p className='erros-style'>{error?.message}</p>
                 <input className='submit-btn' type="submit" value="Log In" />
                 <p className='already-login'>Don't have an account? <Link to='/signup'>Sign in!</Link> </p>
             </form>

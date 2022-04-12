@@ -10,8 +10,8 @@ import toast from 'react-hot-toast';
 
 const Header = () => {
     const navigate = useNavigate();
-    const [user, loading, error] = useAuthState(auth);
-    console.log(user)
+    const [user] = useAuthState(auth);
+   
 
     const logOut = ()=>{
         signOut(auth)
@@ -37,7 +37,11 @@ const Header = () => {
                         {
                             user
                                 ?
+                                <>
                                 <Link onClick={logOut} to='/login'>Log Out</Link>
+                                <Link to='/home'>{user.displayName}</Link>
+                                
+                                </>
                                 :
                                 <><Link to='/login'>Login</Link>
                                 <Link to='/signup'>Register</Link></>
