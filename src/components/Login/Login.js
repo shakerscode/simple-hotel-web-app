@@ -49,15 +49,6 @@ const Login = () => {
         navigate(from, {replace: true})
         toast.success('Successfully login!', { id: 'Success!' })
     }
-    // if (error) {
-    //     if(error.message.includes('')){
-           
-    //     }
-    // }
-  
-    if (loading) {
-        toast.success('Loading...', { id: 'Loading!' })
-    } 
 
     return (
         <div className='sign-in-sec'>
@@ -68,8 +59,10 @@ const Login = () => {
                 <p className='erros-style'>{error?.message?.includes('invalid-email') && 'Invalid  email.'}</p>
                 <label htmlFor="password">Password</label>
                 <input onBlur={(e) => setPassword(e.target.value)} type="password" placeholder='Enter password' required />
-                <p className='erros-style'>{error?.message}</p>
-                <input className='submit-btn' type="submit" value="Log In" />
+                <p className='erros-style'>{error?.message?.includes('wrong-password') && 'Wrong password'}</p>
+                <p className='erros-style'>{error?.message?.includes('internal-error') && 'Internal error. Please try again.'}</p>
+                <p className='erros-style'>{error?.message?.includes('user-not-found') && 'Invalid user'}</p>
+                <input className='submit-btn' type="submit" value={loading ? 'Loading' : 'Log In'} />
                 <p className='already-login'>Don't have an account? <Link to='/signup'>Sign in!</Link> </p>
             </form>
             <input onClick={googleLogin} className='login-with-google' type="submit" value="Continue with google" />
