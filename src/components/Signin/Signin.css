@@ -15,7 +15,7 @@
     margin-bottom: 10px;
     font-size: 20px;
 }
-input{
+input:not([type=checkbox]){
     width: 100%;
     height: 50px;
     border-radius: 5px;
@@ -24,6 +24,15 @@ input{
     font-size: 17px;
     padding-left: 10px;
     margin-bottom: 10px;
+}
+.checkbox{
+    display: flex;
+    align-items: center;
+}
+.checkbox label{
+    font-size: 16px;
+    margin-left: 0.6rem;
+    margin-top: 5px;
 }
 
 .submit-btn{
@@ -40,6 +49,8 @@ input{
     text-align: center;
     font-size: 16px;
 }
+ 
+
 .already-login a{
     text-decoration: none;
     font-weight: 600;
@@ -56,4 +67,9 @@ input{
     color: rgb(219, 10, 10);
     font-weight: 400;
 }
-
+.error-red{
+    color: brown;
+}
+.error-success{
+    color: rgb(12, 169, 117);
+}

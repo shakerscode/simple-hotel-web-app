@@ -27,7 +27,7 @@ const Header = () => {
         <div className='header-sec'>
             <div className='header-div'>
                 <div>
-                    <h1>Logo</h1>
+                    <h1>HomeSide Hotel</h1>
                 </div>
                 <div>
                     <nav>

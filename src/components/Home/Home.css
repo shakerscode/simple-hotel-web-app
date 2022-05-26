@@ -80,3 +80,11 @@
     color: #000000;
     margin-right: 10px;
 }
+
+.home-third-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 80%;
+    margin: 8rem auto;
+}

@@ -6,15 +6,20 @@ import auth from '../../firebase.init';
 import './Signin.css';
 import { useSendEmailVerification } from 'react-firebase-hooks/auth';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import { Helmet } from 'react-helmet-async';
 
 
 
 
 const Signin = () => {
+
+    const[ agree, setAgree] = useState(false)
+
     const navigate = useNavigate()
-    
-     //google login
-     const [signInWithGoogle, users] = useSignInWithGoogle(auth);
+
+    //google login
+    const [signInWithGoogle, users] = useSignInWithGoogle(auth);
 
     //from github hooks 
     const [
@@ -23,11 +28,11 @@ const Signin = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
-    
+
     //email verification
     const [sendEmailVerification, sending] = useSendEmailVerification(auth);
 
- 
+
     //my code
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -35,6 +40,7 @@ const Signin = () => {
     const [confPassword, setConfPassword] = useState('');
     const [errors, setErrors] = useState('');
     const [errorsTwo, setErrorsTwo] = useState('');
+    const [errorsThree, setErrorsThree] = useState('');
 
 
     const getNameValue = (event) => {
@@ -60,43 +66,52 @@ const Signin = () => {
     }
     const signUpBtn = event => {
         event.preventDefault()
-        if(confPassword !== password){
+        if (confPassword !== password) {
             setErrors("Password didn't match!")
             return;
         }
-        if(password.length < 6){
+        if (password.length < 6) {
             setErrorsTwo('Password is too short. Six digit is mandatory.')
             return;
         }
         createUserWithEmailAndPassword(email, password);
         sendEmailVerification()
-  
+
     }
 
 
     if (user) {
-        toast.success('Registration successful!',{id: 'Done'})
+        toast.success('Registration successful!', { id: 'Done' })
         return navigate('/home');
     }
     if (error) {
-        toast(error.message)
+        if(error?.message?.includes('email-already-in-use')){
+            // setErrorsThree('Email already in use');
+            toast.error('Email already in use', {id: 'error'})
+            
+        }
         
+
     }
     if (loading) {
-        toast.success('Loading...',{
-            id: 'Loading'});
-            
+        toast.success('Loading...', {
+            id: 'Loading'
+        });
+
     }
 
     //verification condition
-  
-      if (sending) {
-        toast.success('Sending a verification email', {id: 'Verification email sent.'})
-      }
 
-  
+    if (sending) {
+        toast.success('Sending a verification email', { id: 'Verification email sent.' })
+    }
+
+
     return (
         <div className='sign-in-sec'>
+            <Helmet>
+                <title>Register - HomeSide hotel</title>
+            </Helmet>
             <h1>Sign Up</h1>
             <div>
                 <form onSubmit={signUpBtn}>
@@ -108,17 +123,24 @@ const Signin = () => {
 
                     <label htmlFor="password">Password</label>
                     <input onBlur={getPasswordValue} type="password" placeholder='Enter password' required />
-                     <p className='erros-style'>{errorsTwo}</p>
+                    <p className='erros-style'>{errorsTwo}</p>
 
                     <label htmlFor="password">Confirm Password</label>
                     <input onBlur={getConfPassValue} type="password" placeholder='Confirm password' required />
                     <p className='erros-style'>{errors}</p>
+                    <div className='checkbox'>
+                        <input onClick={() => setAgree(!agree)} type="checkbox" name="terms" id="terms" />
+                        <label className={`checkbox-text ${agree ? '' : 'error-red'}`} htmlFor="terms">Accept our terms and conditions!</label>
+                    </div>
+                    {/* <p className='erros-style'>{errorsThree}</p> */}
+                    <input disabled={!agree} className='submit-btn' type="submit" value="Sign Up" />
 
-                    <input className='submit-btn' type="submit" value="Sign Up" />
 
                     <p className='already-login'>All ready have an account? <Link to='/login'>Login here!</Link> </p>
+                   
                 </form>
-                <input onClick={()=> signInWithGoogle()} className='login-with-google' type="submit" value="Continue with google" />
+                <SocialLogin></SocialLogin>
+                {/* <input onClick={()=> signInWithGoogle()} className='login-with-google' type="submit" value="Continue with google" /> */}
             </div>
         </div>
     );

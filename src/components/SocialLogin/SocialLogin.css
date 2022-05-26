@@ -1,0 +1,39 @@
+ .or-sec-div{
+     display: flex;
+     align-items: center;
+ }
+ 
+ 
+ .or-first-div{
+     margin-top: 10px;
+     background-color: grey;
+     height: 1px;
+     width: 50%;
+ }
+
+ .or-text{
+   background-color: #A1F0F0;
+   margin-top: 4px;
+   padding: 0 15px;
+ }
+ .social-login-system{
+     width: 80%;
+     margin: 2rem auto;
+     padding: 10px;
+     display: flex;
+     justify-content: space-evenly;
+     align-items: center;
+     background-color: #d1fffe;
+     border-radius: 10px;
+     font-size: 20px;
+     cursor: pointer;
+ }
+ .social-login-system:hover{
+     background-color: #daf5f4;
+ }
+ .error-success{
+     color: rgb(78, 255, 78);
+ }
+ .error-wrong{
+    color: rgb(212, 66, 66);
+ }
